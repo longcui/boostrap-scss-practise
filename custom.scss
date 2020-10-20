@@ -1,0 +1,38 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "button.scss";
+
+.test {
+    @include hover-focus {
+        color:$primary;
+        background-color: inherit;
+      }
+}
+
+@each $color, $value in $theme-colors {
+    .btn-outline-falcon-#{$color} {
+        @include button-outline-variant($value);
+        @if $color== "light" {
+        } @else if $color== "dark" {
+        } @else {
+          color: $value;
+          border-color: $value;
+          .disabled {
+            @extend .btn;
+          }
+    
+          @include hover-focus {
+            &:not(:active):not(.active) {
+              color: $value !important;
+              background-color: inherit !important;
+            }
+            &:active.active {
+              color: color-yiq($value);
+            }
+          }
+    
+          &:active {
+            color: #fff !important;
+          }
+        }
+      }
+}
